@@ -38,6 +38,11 @@ object TemplatePlaceholders {
     const val HAS_MERMAID_DIAGRAM = "MERMAID"
 
     /**
+     * Whether Tikz diagrams are used and diagram-related scripts should be loaded.
+     */
+    const val HAS_TIKZ_DIAGRAM = "TIKZ"
+
+    /**
      * Whether math is used and math-related scripts should be loaded.
      */
     const val HAS_MATH = "MATH"

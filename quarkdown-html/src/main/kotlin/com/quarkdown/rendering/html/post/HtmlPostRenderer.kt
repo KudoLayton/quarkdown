@@ -3,6 +3,7 @@ package com.quarkdown.rendering.html.post
 import com.quarkdown.core.ast.attributes.presence.hasCode
 import com.quarkdown.core.ast.attributes.presence.hasMath
 import com.quarkdown.core.ast.attributes.presence.hasMermaidDiagram
+import com.quarkdown.core.ast.attributes.presence.hasTikzDiagram
 import com.quarkdown.core.context.Context
 import com.quarkdown.core.document.DocumentTheme
 import com.quarkdown.core.document.DocumentType
@@ -76,6 +77,11 @@ class HtmlPostRenderer(
             conditional(
                 TemplatePlaceholders.HAS_MERMAID_DIAGRAM,
                 context.attributes.hasMermaidDiagram,
+            )
+            // Mermaid is initialized only if needed.
+            conditional(
+                TemplatePlaceholders.HAS_TIKZ_DIAGRAM,
+                context.attributes.hasTikzDiagram,
             )
             // KaTeX is initialized only if needed.
             conditional(
@@ -241,6 +247,7 @@ class HtmlPostRenderer(
             pushArtifact("paged", condition = context.documentInfo.type == DocumentType.PAGED)
             pushArtifact("math", condition = context.attributes.hasMath)
             pushArtifact("mermaid", condition = context.attributes.hasMermaidDiagram)
+            pushArtifact("tikz", condition = context.attributes.hasTikzDiagram)
             pushArtifact("code", condition = context.attributes.hasCode)
             pushArtifact("websockets", condition = context.attachedPipeline?.options?.useServer == true)
         }

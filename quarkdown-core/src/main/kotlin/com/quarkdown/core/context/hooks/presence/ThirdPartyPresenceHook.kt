@@ -4,11 +4,13 @@ import com.quarkdown.core.ast.Node
 import com.quarkdown.core.ast.attributes.presence.markCodePresence
 import com.quarkdown.core.ast.attributes.presence.markMathPresence
 import com.quarkdown.core.ast.attributes.presence.markMermaidDiagramPresence
+import com.quarkdown.core.ast.attributes.presence.markTikzDiagramPresence
 import com.quarkdown.core.ast.base.block.Code
 import com.quarkdown.core.ast.iterator.AstIteratorHook
 import com.quarkdown.core.ast.iterator.ObservableAstIterator
 import com.quarkdown.core.ast.quarkdown.block.Math
 import com.quarkdown.core.ast.quarkdown.block.MermaidDiagram
+import com.quarkdown.core.ast.quarkdown.block.TikzDiagram
 import com.quarkdown.core.ast.quarkdown.inline.MathSpan
 import com.quarkdown.core.context.MutableContext
 
@@ -56,5 +58,18 @@ class MermaidDiagramPresenceHook(
 ) : AstIteratorHook {
     override fun attach(iterator: ObservableAstIterator) {
         iterator.on<MermaidDiagram> { context.attributes.markMermaidDiagramPresence() }
+    }
+}
+
+/**
+ * Hook that marks the presence of code elements in the [context]'s attributes
+ * if at least one [Code] block is present in the document.
+ * @see com.quarkdown.core.ast.attributes.presence.CodePresenceProperty
+ */
+class TikzDiagramPresenceHook(
+    private val context: MutableContext,
+) : AstIteratorHook {
+    override fun attach(iterator: ObservableAstIterator) {
+        iterator.on<TikzDiagram> { context.attributes.markTikzDiagramPresence() }
     }
 }

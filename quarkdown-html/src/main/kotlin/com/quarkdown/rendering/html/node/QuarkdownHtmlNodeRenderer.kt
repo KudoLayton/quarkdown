@@ -25,6 +25,7 @@ import com.quarkdown.core.ast.quarkdown.block.Numbered
 import com.quarkdown.core.ast.quarkdown.block.PageBreak
 import com.quarkdown.core.ast.quarkdown.block.SlidesFragment
 import com.quarkdown.core.ast.quarkdown.block.Stacked
+import com.quarkdown.core.ast.quarkdown.block.TikzDiagram
 import com.quarkdown.core.ast.quarkdown.block.list.FocusListItemVariant
 import com.quarkdown.core.ast.quarkdown.block.list.LocationTargetListItemVariant
 import com.quarkdown.core.ast.quarkdown.block.toc.TableOfContentsView
@@ -319,6 +320,12 @@ class QuarkdownHtmlNodeRenderer(
     override fun visit(node: MermaidDiagram) =
         buildTag("pre") {
             classNames("mermaid", "fill-height")
+            +escapeCriticalContent(node.code)
+        }
+
+    override fun visit(node: TikzDiagram) =
+        buildTag("script") {
+            attribute("type", "text/tikz")
             +escapeCriticalContent(node.code)
         }
 

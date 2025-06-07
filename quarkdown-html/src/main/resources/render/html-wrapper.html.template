@@ -87,6 +87,14 @@
             [[if:PARAGRAPHINDENT]]--qd-paragraph-text-indent: [[PARAGRAPHINDENT]];[[endif:PARAGRAPHINDENT]]
         }
     </style>
+[[if:TIKZ]]
+    <script src="script/tikz.js"></script>
+    <script type="module">
+        initTikz();
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@drgrice1/tikzjax@1.0.0-beta24/dist/fonts.css">
+    <script src="https://cdn.jsdelivr.net/npm/@drgrice1/tikzjax@1.0.0-beta24/dist/tikzjax.js"></script>
+[[endif:TIKZ]]
 </head>
 <body class="quarkdown quarkdown-[[DOCTYPE]]">
 [[if:SLIDES]]

@@ -45,3 +45,14 @@ class MermaidDiagramFigure(
     child: MermaidDiagram,
     override val caption: String? = null,
 ) : Figure<MermaidDiagram>(child)
+
+/**
+ * An optionally-numbered block which displays a single Tikz diagram, with an optional caption.
+ * @param child wrapped diagram
+ * @param caption optional caption of the diagram
+ * @see TikzDiagram
+ */
+class TikzDiagramFigure(
+    child: TikzDiagram,
+    override val caption: String? = null,
+) : Figure<TikzDiagram>(child)

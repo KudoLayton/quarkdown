@@ -41,6 +41,7 @@ import com.quarkdown.core.ast.quarkdown.block.Numbered
 import com.quarkdown.core.ast.quarkdown.block.PageBreak
 import com.quarkdown.core.ast.quarkdown.block.SlidesFragment
 import com.quarkdown.core.ast.quarkdown.block.Stacked
+import com.quarkdown.core.ast.quarkdown.block.TikzDiagram
 import com.quarkdown.core.ast.quarkdown.block.toc.TableOfContentsView
 import com.quarkdown.core.ast.quarkdown.inline.InlineCollapse
 import com.quarkdown.core.ast.quarkdown.inline.MathSpan
@@ -149,6 +150,8 @@ interface NodeVisitor<T> {
     fun visit(node: TableOfContentsView): T
 
     fun visit(node: MermaidDiagram): T
+
+    fun visit(node: TikzDiagram): T
 
     // Quarkdown inline
 
