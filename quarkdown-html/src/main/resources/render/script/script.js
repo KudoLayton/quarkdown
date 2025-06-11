@@ -2,10 +2,15 @@ class AsyncExecutionQueue {
     constructor(onExecute) {
         this.queue = [];
         this.onExecute = onExecute;
+        this.finished = false;
     }
 
     push(fn) {
         this.queue.push(fn);
+    }
+
+    isFinished() {
+        return this.finished;
     }
 
     async execute() {
@@ -28,10 +33,24 @@ function isReady() {
 
 // Queue of actions to be executed before the document is handled by Reveal/Paged.
 // The document is elaborated only after this queue is executed.
-const preRenderingExecutionQueue = new AsyncExecutionQueue();
+let preRenderingExecutionQueueFinished = false;
+let postRenderingExecutionQueueFinished = false;
+
+const preRenderingExecutionQueue = new AsyncExecutionQueue(() => {
+    preRenderingExecutionQueueFinished = true;
+    if (postRenderingExecutionQueueFinished)
+    {
+        readyState = true;
+    }
+});
+
 // Queue of actions to be executed after the document has been rendered in its final form.
 const postRenderingExecutionQueue = new AsyncExecutionQueue(() => {
-    readyState = true;
+    postRenderingExecutionQueueFinished = true;
+    if (preRenderingExecutionQueueFinished)
+    {
+        readyState = true;
+    }
 });
 
 //
